@@ -1,6 +1,7 @@
 //Accessing header element
-var header = document.getElementsByClassName("central-textlogo__image sprite svg-Wikipedia_wordmark")[0];
-const linebreak = document.createElement("br")
+var header = document.querySelectorAll('body *')[0];
+var linebreak = document.createElement("br")
+linebreak.setAttribute('id',"inserted3")
 
 //Creating new button
 var button = document.createElement("button");
@@ -17,12 +18,15 @@ header.insertAdjacentElement("beforebegin", linebreak)
 var input = document.createElement("input")
 input.setAttribute('id', 'inserted1')
 input.setAttribute('placeholder',"Type here")
+input.style.width = '394px'
+input.style.height = '30px'
 button.insertAdjacentElement("beforebegin",input)
 
+/*
 //Getting some text
 var text = document.getElementsByClassName("jsl10n localized-slogan")[0]
 
 //Button function
 button.addEventListener('click', () => {
     text.textContent = input.value
-})
+})*/
