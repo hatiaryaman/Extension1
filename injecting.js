@@ -3,7 +3,7 @@ var header = document.querySelectorAll('body *')[0];
 var linebreak = document.createElement("br")
 linebreak.setAttribute('id',"inserted3")
 
-//Creating new button
+//Creating new buttons
 var button = document.createElement("button");
 var buttonText = document.createTextNode("click")
 button.setAttribute('id', 'inserted2')
