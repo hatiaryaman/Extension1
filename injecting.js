@@ -6,6 +6,7 @@ linebreak.setAttribute('id',"inserted3")
 //Creating new buttons
 var button = document.createElement("button");
 var buttonText = document.createTextNode("click")
+var inputText = "";
 button.setAttribute('id', 'inserted2')
 button.appendChild(buttonText)
 
@@ -22,11 +23,10 @@ input.style.width = '394px'
 input.style.height = '30px'
 button.insertAdjacentElement("beforebegin",input)
 
-/*
-//Getting some text
-var text = document.getElementsByClassName("jsl10n localized-slogan")[0]
-
 //Button function
 button.addEventListener('click', () => {
-    text.textContent = input.value
-})*/
+    inputText = input.value
+    input.value = ''
+    console.log(inputText)
+    window.open("https://www.google.com/search?q=" + inputText, "_blank")
+})
