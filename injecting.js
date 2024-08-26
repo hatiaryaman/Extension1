@@ -1,32 +1,47 @@
-//Accessing header element
-var header = document.querySelectorAll('body *')[0];
-var linebreak = document.createElement("br")
-linebreak.setAttribute('id',"inserted3")
+var body = document.querySelectorAll('body *');
 
-//Creating new buttons
-var button = document.createElement("button");
-var buttonText = document.createTextNode("click")
-var inputText = "";
-button.setAttribute('id', 'inserted2')
-button.appendChild(buttonText)
+// adding spans
+var j = 0
+for (var i = 0; i < body.length; i++) {
+    var span = document.createElement('span')
+    span.innerHTML = body[i].tagName
+    span.setAttribute('class', 'inserted' + i)
+    body[i].appendChild(span)
+    body[i].setAttribute('class', 'inserting' + i + ' ' + body[i].className)
+}
 
-//Adds the button
-header.insertAdjacentElement("beforebegin", button)
-// adds a line break so the button is not on the same line as the wiki header
-header.insertAdjacentElement("beforebegin", linebreak)
+// style
+var styles = ``
+for (var i = 0; i < body.length; i++){
+    styles = styles + `
+    
+    .inserted`+i+` {
+        visibility: hidden;
+        display: block;
+        position: relative;
+        left: 30px;
+        border: 1px solid black;
+        background: #eee;
+        font-size: small;
+        font-family: "Times New Roman", Times, serif;
+        font-weight: 300;
+        font-style: normal;
+    }
 
-//Creating new input
-var input = document.createElement("input")
-input.setAttribute('id', 'inserted1')
-input.setAttribute('placeholder',"Type here")
-input.style.width = '394px'
-input.style.height = '30px'
-button.insertAdjacentElement("beforebegin",input)
+    .inserting`+i+`:hover .inserted`+i+` {
+        visibiliity:visible;
+    }
+    `
+}
 
-//Button function
-button.addEventListener('click', () => {
-    inputText = input.value
-    input.value = ''
-    console.log(inputText)
-    window.open("https://www.google.com/search?q=" + inputText, "_blank")
-})
+var style = document.createElement('style')
+style.setAttribute('src','injecting.css')
+stylesheet = style.sheet
+
+for (var i = 0; i < body.length; i++){
+    //stylesheet.addRule(".inserted"+i, "visibility: hidden;display: block;position: relative;left: 30px;border: 1px solid black;background: #eee;font-size: small;font-family: 'Times New Roman', Times, serif;font-weight: 300;font-style: normal;")
+
+    stylesheet.addRule(".inserted"+i,":hover .inserted"+i, `visibiliity:visible;`)
+}
+
+document.head.appendChild(style)
