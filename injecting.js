@@ -1,47 +1,43 @@
 var body = document.querySelectorAll('body *');
 
-// adding spans
-var j = 0
-for (var i = 0; i < body.length; i++) {
+function info(e) {
+    return "<"+e.tagName + " id='" + e.id + "' class='" + e.className + "'></" + e.tagName + ">"
+}
+
+var spans = []
+
+for (let i = 0; i < body.length; i++){
     var span = document.createElement('span')
-    span.innerHTML = body[i].tagName
-    span.setAttribute('class', 'inserted' + i)
-    body[i].appendChild(span)
-    body[i].setAttribute('class', 'inserting' + i + ' ' + body[i].className)
+    span.textContent = info(body[i])
+    span.setAttribute('id', 'inserted' + i)
+    span.style.visibility = "hidden"
+
+    //Styel stuff
+    span.style.position = "absolute"
+    span.style.fontSize = "12px"
+    span.style.fontFamily = "Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"
+    span.style.backgroundColor = "DeepSkyBlue"
+    span.style.padding = "5px"
+    span.style.border = "1px solid black"
+    span.style.zIndex = '1000';
+    span.style.width = "200px"
+    span.style.height = "20px"
+    span.style.textAlign = "center"
+
+    spans.push(span)
 }
 
-// style
-var styles = ``
-for (var i = 0; i < body.length; i++){
-    styles = styles + `
-    
-    .inserted`+i+` {
-        visibility: hidden;
-        display: block;
-        position: relative;
-        left: 30px;
-        border: 1px solid black;
-        background: #eee;
-        font-size: small;
-        font-family: "Times New Roman", Times, serif;
-        font-weight: 300;
-        font-style: normal;
-    }
+for (let i = 0; i < body.length; i++) {
+    body[i].appendChild(spans[i])
 
-    .inserting`+i+`:hover .inserted`+i+` {
-        visibiliity:visible;
-    }
-    `
+    body[i].addEventListener("mouseover", function (event){
+        event.stopPropagation();
+        console.log(info(body[i]))
+        spans[i].style.visibility = 'visible';
+    })
+
+    body[i].addEventListener("mouseleave", function (event){
+        event.stopPropagation();
+        spans[i].style.visibility = 'hidden';
+    })
 }
-
-var style = document.createElement('style')
-style.setAttribute('src','injecting.css')
-stylesheet = style.sheet
-
-for (var i = 0; i < body.length; i++){
-    //stylesheet.addRule(".inserted"+i, "visibility: hidden;display: block;position: relative;left: 30px;border: 1px solid black;background: #eee;font-size: small;font-family: 'Times New Roman', Times, serif;font-weight: 300;font-style: normal;")
-
-    stylesheet.addRule(".inserted"+i,":hover .inserted"+i, `visibiliity:visible;`)
-}
-
-document.head.appendChild(style)
